@@ -1,0 +1,11 @@
+import connectDb from "../DB/connection";
+import authRouter from './Modules/auth/auth.router.js';
+
+const initApp= (app,express)=>{
+    connectDb();
+    app.use(express.json());
+    app.use('/auth',authRouter);
+    app.use('*',(req,res)=>{
+        return res.status(404).json({message:"page not found"});
+    }); 
+}
